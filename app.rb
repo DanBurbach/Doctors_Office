@@ -11,11 +11,13 @@ end
 
 post('/add_doctor') do
   name = params["name"]
-  new_doctor = Doctor.new({:name => name, :specialty =>, :id => nil})
-  new_doctor.save
+  specialty = params["specialty"]
+  doctor = Doctor.new({:name => name, :specialty => specialty, :id => nil})
+  doctor.save
   @name = doctor.name
   @specialty = doctor.specialty
   @doctors = Doctor.all
+  binding.pry
   erb(:input)
 end
 

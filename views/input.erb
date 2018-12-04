@@ -1,13 +1,5 @@
 <h1>Doctor's Office Listing</h1>
-<ul>
-  <% if @example.kind_of?(Array) %>
-    <% @example.each do |each| %>
-      <p id='<%= each.id %>'><a href='/output/<%= each.id %>'><%= each.name %></a></p>
-    <% end %>
-  <% else %>
-    <p id='<%= @example.id %>'><a href='/output/<%= @example.id %>'><%= @example.name %></a></p>
-  <% end %>
-</ul>
+
 
 <h3>Enter In Doctor Information</h3>
 <form action="/add_doctor" method="post">
@@ -16,8 +8,12 @@
     <input type="text" name="name" required pattern=".*\S+.*" title="This field is required" placeholder="example">
   </div>
   <div class="form-group">
-    <label for="specialty">Specialty:</label>
-    <input type="text" name="specialty" required pattern=".*\S+.*" title="This field is required" placeholder="example">
+    <label for="specialty_name" name="specialty_name">Specialty:</label>
+    <select name="specialty_name">
+      <option value="General Practice">General Practice</option>
+      <option value="Love Guru">Love Guru</option>
+      <option value="Higher Thought">Higher Thought</option>
+    </select>
   </div>
   <button type="submit" name="button">Add</button>
 </form>

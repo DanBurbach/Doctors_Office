@@ -2,7 +2,7 @@ require 'rspec'
 require 'pg'
 require 'doctor'
 
-DB = PG.connect({:dbname => 'doctors_db_test'})
+DB = PG.connect({:dbname => 'hospital'})
 
 RSpec.configure do |config|
   config.after(:each) do
