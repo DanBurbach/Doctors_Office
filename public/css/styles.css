@@ -1,0 +1,13 @@
+h1 {
+  text-align: center;
+}
+
+<ul>
+  <% if @example.kind_of?(Array) %>
+    <% @example.each do |each| %>
+      <p id='<%= each.id %>'><a href='/output/<%= each.id %>'><%= each.name %></a></p>
+    <% end %>
+  <% else %>
+    <p id='<%= @example.id %>'><a href='/output/<%= @example.id %>'><%= @example.name %></a></p>
+  <% end %>
+</ul>

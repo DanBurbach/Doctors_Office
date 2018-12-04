@@ -24,6 +24,7 @@ class Doctor
       id = doctor.fetch("id").to_i()
       doctors.push(Doctor.new({:first_name => first_name, :last_name => last_name, :specialty_id => specialty_id, :id => id}))
     end
+    binding.pry
     doctors
   end
 
@@ -46,14 +47,7 @@ class Doctor
   def ==(another_doctor)
     self.first_name().==(another_doctor.first_name()).&(self.last_name().==(another_doctor.last_name())).&(self.specialty_id().==(another_doctor.specialty_id()))
   end
-end
 
-# <ul>
-#   <% if @example.kind_of?(Array) %>
-#     <% @example.each do |each| %>
-#       <p id='<%= each.id %>'><a href='/output/<%= each.id %>'><%= each.name %></a></p>
-#     <% end %>
-#   <% else %>
-#     <p id='<%= @example.id %>'><a href='/output/<%= @example.id %>'><%= @example.name %></a></p>
-#   <% end %>
-# </ul>
+  def Delete(id)
+    DB.exec("DELETE FROM doctors_tb WHERE id = #{doctor.id};")
+end
