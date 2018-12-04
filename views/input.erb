@@ -1,4 +1,4 @@
-<h1></h1>
+<h1>Doctor's Office Listing</h1>
 <ul>
   <% if @example.kind_of?(Array) %>
     <% @example.each do |each| %>
@@ -9,10 +9,15 @@
   <% end %>
 </ul>
 
-
-<form action="/" method="post">
+<h3>Enter In Doctor Information</h3>
+<form action="/add_doctor" method="post">
   <div class="form-group">
-    <input type="text" name="name" placeholder="example">
+    <label for="name">Doctor's Name:</label>
+    <input type="text" name="name" required pattern=".*\S+.*" title="This field is required" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="specialty">Specialty:</label>
+    <input type="text" name="specialty" required pattern=".*\S+.*" title="This field is required" placeholder="example">
   </div>
   <button type="submit" name="button">Add</button>
 </form>

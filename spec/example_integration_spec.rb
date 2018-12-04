@@ -1,15 +1,19 @@
-require ('rspec')
-require ('capybara/rspec')
-require ('pry')
-require ('./app')
-require ('capybara')
-require ('./lib/example')
-
-describe('Mrfluffles the Cat', {:type => :feature}) do
-  it('checks whether user interacted with his cat') do
-    visit('/')
-    fill_in('user_answer', :with => 'Mr. Fluffles')
-    click_button('Submit answer')
-    expect(page).to have_content('its finds a snippet of text on output screen!')
-  end
-end
+# require ('rspec')
+# require ('capybara/rspec')
+# require ('pry')
+# require ('./app')
+# require ('capybara')
+# require ('./lib/example')
+#
+# describe("#actors") do
+#   it("returns all of the actors in a particular movie") do
+#     movie = Movie.new({:name => "Oceans Eleven", :id => nil})
+#     movie.save()
+#     george = Actor.new({:name => "George Clooney", :id => nil})
+#     george.save()
+#     brad = Actor.new({:name => "Brad Pitt", :id => nil})
+#     brad.save()
+#     movie.update({:actor_ids => [george.id(), brad.id()]})
+#     expect(movie.actors()).to(eq([george, brad]))
+#   end
+# end
