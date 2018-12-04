@@ -4,11 +4,12 @@ require'pg'
 DB = PG.connect({:dbname => 'hospital'})
 
 class Doctor
-  attr_accessor(:name, :specialty_id)
+  attr_accessor(:first_name, :last_name, :specialty_id)
   attr_reader(:id)
 
   def initialize(attributes)
-    @name = attributes.fetch(:name)
+    @first_name = attributes.fetch(:first_name)
+    @last_name = attributes.fetch(:last_name)
     @specialty_id = attributes.fetch(:specialty_id)
     @id = attributes.fetch(:id).to_i
   end
@@ -17,10 +18,11 @@ class Doctor
     returned_doctors = DB.exec("SELECT * FROM doctors_tb;")
     doctors = []
     returned_doctors.each() do |doctor|
-      name = doctor.fetch("name")
-      specialty_id = doctor.fetch("specialty_id")
+      first_name = doctor.fetch("first_name")
+      last_name = doctor.fetch("last_name")
+      specialty_id = doctor.fetch("specialty_id").to_i
       id = doctor.fetch("id").to_i()
-      doctors.push(Doctor.new({:name => name, :specialty_id => specialty_id, :id => id}))
+      doctors.push(Doctor.new({:first_name => first_name, :last_name => last_name, :specialty_id => specialty_id, :id => id}))
     end
     doctors
   end
@@ -28,20 +30,21 @@ class Doctor
   def self.find(id)
     returned_doctors = DB.exec("SELECT * FROM doctors_tb WHERE id = #{id};")
     returned_doctors.each() do |doctor|
-      name = doctor.fetch("name")
-      specialty_id = doctor.fetch("specialty_id")
+      first_name = doctor.fetch("first_name")
+      last_name = doctor.fetch("last_name")
+      specialty_id = doctor.fetch("specialty_id").to_i
       id = doctor.fetch("id").to_i()
-      return Doctor.new({:name => name, :specialty_id => specialty_id, :id => id})
+      return Doctor.new({:first_name => first_name, :last_name => last_name, :specialty_id => specialty_id, :id => id})
     end
   end
 
   def save
-    result = DB.exec("INSERT INTO doctors_tb(name) VALUES ('#{@name}') RETURNING id;")
+    result = DB.exec("INSERT INTO doctors_tb(first_name, last_name, specialty_id) VALUES ('#{@first_name}','#{@last_name}', #{specialty_id}) RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
   def ==(another_doctor)
-    self.name().==(another_doctor.name()).&(self.id().==(another_doctor.id()))
+    self.first_name().==(another_doctor.first_name()).&(self.last_name().==(another_doctor.last_name())).&(self.specialty_id().==(another_doctor.specialty_id()))
   end
 end
 

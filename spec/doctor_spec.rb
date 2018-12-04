@@ -10,15 +10,15 @@ describe(Doctor) do
 
   describe("#name") do
     it("tells you the doctor's name") do
-      doctor = Doctor.new({:name => "Dr. Fluffles", :specialty => "Higher Thought", :id => nil})
+      doctor = Doctor.new({:first_name => "Dr", :last_name => "Fluffles", :specialty_id => 1, :id => nil})
       doctor.save
-      expect(doctor.name()).to(eq("Dr. Fluffles"))
+      expect(doctor.last_name()).to(eq("Fluffles"))
     end
   end
 
   describe("#id") do
     it("sets its ID when you save it") do
-      doctor = Doctor.new({:name => "Dr. Fluffles", :specialty => "Higher Thought", :id => nil})
+      doctor = Doctor.new({:first_name => "Dr", :last_name => "Fluffles", :specialty_id => 1, :id => nil})
       doctor.save()
       expect(doctor.id()).to(be_an_instance_of(Integer))
     end
@@ -26,7 +26,7 @@ describe(Doctor) do
 
   describe("#save") do
     it("lets you save lists to the database") do
-      doctor = Doctor.new({:name => "Dr. Fluffles", :specialty => "Higher Thought", :id => nil})
+      doctor = Doctor.new({:first_name => "Dr", :last_name => "Fluffles", :specialty_id => 1, :id => nil})
       doctor.save()
       expect(Doctor.all()).to(eq([doctor]))
     end
@@ -34,8 +34,8 @@ describe(Doctor) do
 
   describe("#==") do
     it("is the same list if it has the same name") do
-      doctor1 = Doctor.new({:name => "Dr. Fluffles", :specialty => "Higher Thought", :id => nil})
-      doctor2 = Doctor.new({:name => "Dr. Fluffles", :specialty => "Higher Thought", :id => nil})
+      doctor1 = Doctor.new({:first_name => "Dr", :last_name => "Fluffles", :specialty_id => 1, :id => nil})
+      doctor2 = Doctor.new({:first_name => "Dr", :last_name => "Fluffles", :specialty_id => 1, :id => nil})
       doctor1.save
       doctor2.save
       expect(doctor1).to(eq(doctor2))

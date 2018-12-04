@@ -1,7 +1,7 @@
 require'pg'
 
 
-DB = PG.connect({:dbname => 'specialty_test'})
+DB = PG.connect({:dbname => 'hospital'})
 
 class Specialty
   attr_accessor(:specialty_name)
@@ -13,7 +13,7 @@ class Specialty
   end
 
   def self.all
-    result = DB.exec("SELECT * FROM specialties_tb;")
+    returned_specialties = DB.exec("SELECT * FROM specialties_tb;")
     specialties = []
     result.each() do |specialty|
       specialty_name = specialty.fetch("specialty_name")
@@ -24,7 +24,7 @@ class Specialty
   end
 
   def self.find(id)
-    result = DB.exec("SELECT * FROM specialties_tb WHERE id = #{id};")
+    returned_specialties = DB.exec("SELECT * FROM specialties_tb WHERE id = #{id};")
     result.each() do |specialty|
       specialty_name = specialty.fetch("specialty_name")
       id = specialty.fetch("id").to_i()
