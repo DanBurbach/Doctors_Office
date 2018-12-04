@@ -4,13 +4,14 @@ require'pg'
 DB = PG.connect({:dbname => 'hospital'})
 
 class Patient
-  attr_accessor(:first_name, :last_name, :doctor_id)
+  attr_accessor(:first_name, :last_name, :doctor_id, :birthday)
   attr_reader(:id)
 
   def initialize(attributes)
     @first_name = attributes.fetch(:first_name)
     @last_name = attributes.fetch(:last_name)
     @doctor_id = attributes.fetch(:doctor_id)
+    @birthday= attributes.fetch(:birthday)
     @id = attributes.fetch(:id).to_i
   end
 
@@ -20,9 +21,10 @@ class Patient
     returned_patients.each() do |patient|
       first_name = patient.fetch("first_name")
       last_name = patient.fetch("last_name")
+      birthday = patient.fetch("birthday")
       doctor_id = patient.fetch("doctor_id").to_i
       id = patient.fetch("id").to_i()
-      patients.push(Patient.new({:first_name => first_name, :last_name => last_name, :doctor_id => doctor_id, :id => id}))
+      patients.push(Patient.new({:first_name => first_name, :last_name => last_name, :birthday => birthday, :doctor_id => doctor_id, :id => id}))
     end
     patients
   end
@@ -32,14 +34,15 @@ class Patient
     returned_patients.each() do |patient|
       first_name = patient.fetch("first_name")
       last_name = patient.fetch("last_name")
+      birthday = patient.fetch("birthday")
       doctor_id = patient.fetch("doctor_id").to_i
       id = patient.fetch("id").to_i()
-      return Patient.new({:first_name => first_name, :last_name => last_name, :doctor_id => doctor_id, :id => id})
+      return Patient.new({:first_name => first_name, :last_name => last_name, :birthday => birthday, :doctor_id => doctor_id, :id => id})
     end
   end
 
   def save
-    result = DB.exec("INSERT INTO patients_tb(first_name, last_name, doctor_id) VALUES ('#{@first_name}','#{@last_name}', #{doctor_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO patients_tb(first_name, last_name, birthday, doctor_id) VALUES ('#{@first_name}','#{@last_name}', '#{@birthday}', #{doctor_id}) RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
