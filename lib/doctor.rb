@@ -11,7 +11,7 @@ class Doctor
     @first_name = attributes.fetch(:first_name)
     @last_name = attributes.fetch(:last_name)
     @specialty_id = attributes.fetch(:specialty_id)
-    @id = attributes.fetch(:id).to_i
+    @id = attributes.fetch(:id).to_i rescue nil
   end
 
   def self.all
@@ -24,7 +24,6 @@ class Doctor
       id = doctor.fetch("id").to_i()
       doctors.push(Doctor.new({:first_name => first_name, :last_name => last_name, :specialty_id => specialty_id, :id => id}))
     end
-    binding.pry
     doctors
   end
 
@@ -50,4 +49,5 @@ class Doctor
 
   def Delete(id)
     DB.exec("DELETE FROM doctors_tb WHERE id = #{doctor.id};")
+  end
 end

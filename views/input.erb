@@ -19,14 +19,15 @@
       </div>
       <button type="submit" name="button">Add</button>
     </form>
+
+    <h2>Your Doctors</h2><br>
+    <ul>
+      <% @doctors.each do |doctor| %>
+      <li><a href="/input/<%= doctor.id %>">Dr. <%= doctor.first_name %> <%= doctor.last_name %></a></li>
+      <% end %>
+    </ul>
   </div>
 
-  <h2>Your Doctors</h2>
-  <ul>
-    <% @doctors.each do |doctor| %>
-      <li><a href="/input/<%= doctor.id %>"><%= doctor.first_name %></a></li>
-    <% end %>
-  </ul>
 
 
 <div class="col-md-6">
@@ -45,15 +46,24 @@
        min="1900-01-01" max="2018-12-04">
     </div>
 
+    <h2>Your Patients</h2><br>
 
-    <div class="form-group">
-      <label for="specialty_id" name="specialty_id">Specialty:</label>
-      <select name="specialty_id">
+    <form action="/add_patient">
+      <label for="patients">Select a Doctor</lable>
+      <select id='doctors' name="doctors" type='text'>
+        <% @doctors.each() do |doctor| %>
+          <option value="<%= doctor.id()%>"> <%= doctor.first_name() %> <%= doctor.last_name() %> </option>
+        <% end %>
+      </select>
+
+    <!-- <div class="form-group">
+      <label for="doctor_id" name="specialty_id">Specialty:</label>
+      <select name="doctor_id">
         <option value="1">General Practice</option>
         <option value="2">Love Guru</option>
         <option value="3">Higher Thought</option>
       </select>
-    </div>
-    <button type="submit" name="button">Add</button>
+    </div> -->
+    <button class="btn btn-success" type="submit" name="button">Add</button>
   </form>
 </div>

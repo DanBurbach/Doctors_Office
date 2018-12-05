@@ -49,6 +49,11 @@ class Patient
   def ==(another_patient)
     self.first_name().==(another_patient.first_name()).&(self.last_name().==(another_patient.last_name())).&(self.doctor_id().==(another_patient.doctor_id()))
   end
+
+  def Delete(id)
+    DB.exec("DELETE FROM patients_tb WHERE id = #{doctor.id};")
+  end
+
 end
 
 # <ul>
@@ -60,3 +65,9 @@ end
 #     <p id='<%= @example.id %>'><a href='/output/<%= @example.id %>'><%= @example.name %></a></p>
 #   <% end %>
 # </ul>
+
+# <!-- <ul>
+#   <% @patient.each() do |patient| %>
+#   <li><a href="/input/<%= patient.id %>">Dr. <%= patient.first_name %> <%= patient.last_name %></a></li>
+#   <% end %>
+# </ul> -->

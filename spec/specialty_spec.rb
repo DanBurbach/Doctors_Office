@@ -34,11 +34,11 @@ describe(Specialty) do
 
   describe("#==") do
     it("is the same list if it has the same name") do
-      specialty = Specialty.new({:specialty_name => 'higher thought', :id => nil})
-          specialty = Specialty.new({:specialty_name => 'higher thought', :id => nil})
-      patient1.save
-      patient2.save
-      expect(patient1).to(eq(patient2))
+      specialty1 = Specialty.new({:specialty_name => 'higher thought', :id => nil})
+      specialty2 = Specialty.new({:specialty_name => 'higher thought', :id => nil})
+      specialty1.save
+      specialty2.save
+      expect(specialty1).to(eq(specialty2))
     end
   end
 end
